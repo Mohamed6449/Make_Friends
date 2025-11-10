@@ -6,9 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace API.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class MemberController(AppDbContext appDbContext) : ControllerBase
+    public class MemberController(AppDbContext appDbContext) : BaseApiController
     {
 
         public async Task<IActionResult> GetMembersAsync()
