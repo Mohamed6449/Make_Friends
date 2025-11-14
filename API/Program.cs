@@ -1,4 +1,5 @@
 using API.Data;
+using API.Middleware;
 using API.Services;
 using API.Services.implements;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -31,9 +32,9 @@ builder.Services.AddDbContext<AppDbContext>(option=>
     option.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
 builder.Services.AddCors();
+
 var app = builder.Build();
-
-
+app.UseMiddleware<ExeptionMiddleware>();
 app.UseCors(x=> 
     x.AllowAnyHeader()
     .AllowAnyMethod()
