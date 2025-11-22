@@ -21,7 +21,7 @@ public class TokenServices(IConfiguration configuration) : ITokenService
         new Claim(ClaimTypes.Name, user.UserName!),
          Id,
      };
-    var TokenOption = new JwtSecurityToken(expires: DateTime.UtcNow.AddDays(7), signingCredentials: new SigningCredentials(tokenKey, SecurityAlgorithms.HmacSha256));
+    var TokenOption = new JwtSecurityToken(claims:claims, expires: DateTime.UtcNow.AddDays(7), signingCredentials: new SigningCredentials(tokenKey, SecurityAlgorithms.HmacSha256));
     var Token=  new JwtSecurityTokenHandler().WriteToken(TokenOption);
     return Token;
   }

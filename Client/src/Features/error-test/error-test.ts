@@ -14,7 +14,9 @@ export class ErrorTest {
   base: string = 'https://localhost:7032/api/';
   getNotFound404() {
     this.http.get(this.base + 'buggy/not-found').subscribe({
-      error: (e) => this.router.navigateByUrl('/notfound')
+      error: (e) =>{console.log(e);this.router.navigateByUrl('/notfound');
+      }
+
     });}
 
   getBadRequest400() {

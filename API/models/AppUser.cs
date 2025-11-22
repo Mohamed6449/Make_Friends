@@ -7,7 +7,9 @@ public class AppUser
     public string? UserName { get; set; }
     public string? Email { get; set; }
 
-public string?ImageUrl {get; set; }
+    public string?ImageUrl {get; set; }
     public required byte[] PasswordHash { get; set; }
     public required byte[] PasswordSalt { get; set; }
+
+    public Member member { get; set; } = null!;
 }

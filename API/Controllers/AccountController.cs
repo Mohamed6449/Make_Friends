@@ -54,7 +54,8 @@ public class AccountController(AppDbContext appDbContext, AccountInterface accou
        Email = user.Email!,
        UserName = user.UserName!,
        Id = user.Id,
-         Token = tokenService.CreateToken(user)
+         Token = tokenService.CreateToken(user),
+         ImageUrl=user.ImageUrl
    });
   }
 

@@ -1,5 +1,5 @@
 <header
-  class="p-3 w-full fixed top-0 z-50 bg-gradient-to-r from-primary to-black flex items-center justify-between"
+  class="p-3 w-full fixed top-0 z-50 bg-linear-to-r from-primary to-black flex items-center justify-between"
 >
   <!-- ⬅️ الجزء الشمال -->
   <div class="flex items-center gap-10 px-10  text-white">
@@ -15,21 +15,45 @@
     </a>
 
     <nav class="flex gap-6 uppercase text-lg text-white">
-      <a routerLink="/members"  routerLinkActive="text-accent">Matches</a>
+      <a routerLink="/members" [routerLinkActiveOptions]="{ exact: true }"
+       routerLinkActive="text-accent">Matches</a>
       <a routerLink="/lists" routerLinkActive="text-accent">Lists</a>
       <a routerLink="/messages" routerLinkActive="text-accent">Messages</a>
       <a routerLink="/errors" routerLinkActive="text-accent">Errors</a>
     </nav>
+    @if (busyService.busyRequestCount()>0) {
+      <span class="loading loading-spinner text-accent"></span>
+    }
   </div>
+<div class="flex align-middle ml-auto gap-3">
+
+  <div class="dropdown dropdown-hover dropdown-end mr-5">
+    <button tabindex="1" role="button" class=" flex flex-col justify-center align-middle
+text-white cursor-pointer text-xs uppercase
+    ">
+<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 flex self-center">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M9.53 16.122a3 3 0 0 0-5.78 1.128 2.25 2.25 0 0 1-2.4 2.245 4.5 4.5 0 0 0 8.4-2.245c0-.399-.078-.78-.22-1.128Zm0 0a15.998 15.998 0 0 0 3.388-1.62m-5.043-.025a15.994 15.994 0 0 1 1.622-3.395m3.42 3.42a15.995 15.995 0 0 0 4.764-4.648l3.876-5.814a1.151 1.151 0 0 0-1.597-1.597L14.146 6.32a15.996 15.996 0 0 0-4.649 4.763m3.42 3.42a6.776 6.776 0 0 0-3.42-3.42" />
+</svg>
+<span class="text-white">{{selectedTheme()}}</span>
+  </button>
+    <ul tabindex="-1" class="h-[60vh] overflow-auto dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm">
+        @for (item of themes; track $index) {
+          <li ><a (click)="changeTheme(item)">{{item}}</a></li>
+        }
+    </ul>
+
+  </div>
+
+</div>
 
   @if(accountService.currentUser();as user){
     <div class="dropdown dropdown-hover dropdown-end">
   <div tabindex="0" role="button" class="flex items-center gap-3 text-xl text-white cursor-pointer">
-    <img src="/user.png" alt="user avatar" class="w-10  rounded-full " />
+    <img [src]="user.imageUrl" alt="user avatar" class="w-12  rounded-full " />
     <span class="ml-2 text-white">{{user.userName}}</span>
   </div>
   <ul tabindex="-1" class="dropdown-content  menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm">
-    <li><a>Edit profile</a></li>
+    <li><a (click)="close()" routerLink="/member/{{user.id}}">Edit profile</a></li>
     <li><a (click)="Logout()">Logout</a></li>
   </ul>
 </div>

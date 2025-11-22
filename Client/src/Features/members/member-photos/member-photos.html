@@ -1,0 +1,14 @@
+@if(photos$|async;as photos){
+
+  <div class="grid grid-cols-5 h-[65vh] auto-rows-min gap-3 p-5 overflow-auto" >
+    @for (item of photos; track item.id) {
+
+      <img [src]="item.url" alt="photo of member" class="rouded-lg w-full">
+      @for (itemf of dd; track $index) {
+        <img [src]="item.url" alt="photo of member" class="rouded-lg w-full">
+
+      }
+    }
+
+  </div>
+}
